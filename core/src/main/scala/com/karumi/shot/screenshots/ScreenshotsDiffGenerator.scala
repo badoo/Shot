@@ -3,7 +3,10 @@ package com.karumi.shot.screenshots
 import java.io.File
 import com.karumi.shot.base64.Base64Encoder
 import com.karumi.shot.domain.model.ScreenshotComparisionErrors
-import com.karumi.shot.domain.{DifferentScreenshots, ScreenshotsComparisionResult}
+import com.karumi.shot.domain.{
+  DifferentScreenshots,
+  ScreenshotsComparisionResult
+}
 import com.sksamuel.scrimage.{Image, Position, writer}
 import com.sksamuel.scrimage.composite.RedComposite
 
@@ -35,7 +38,8 @@ class ScreenshotsDiffGenerator(base64Encoder: Base64Encoder) {
     // Align size of the images to generate proper diff file
     val alignWidth = Math.max(originalImage.width, newImage.width)
     val alignHeight = Math.max(originalImage.height, newImage.height)
-    originalImage = originalImage.resizeTo(alignWidth, alignHeight, Position.TopLeft)
+    originalImage =
+      originalImage.resizeTo(alignWidth, alignHeight, Position.TopLeft)
     newImage = newImage.resizeTo(alignWidth, alignHeight, Position.TopLeft)
 
     val diff = newImage.composite(new RedComposite(1d), originalImage)

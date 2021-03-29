@@ -25,7 +25,10 @@ class ScreenshotsComparator {
       val oldScreenshot =
         Image.fromFile(recordedScreenshotFile)
       val newScreenshot = ScreenshotComposer.composeNewScreenshot(screenshot)
-      if (imagesAreDifferent(screenshot, oldScreenshot, newScreenshot, tolerance)) {
+      if (imagesAreDifferent(screenshot,
+                             oldScreenshot,
+                             newScreenshot,
+                             tolerance)) {
         Some(DifferentScreenshots(screenshot))
       } else {
         None
