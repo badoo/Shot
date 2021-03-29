@@ -25,18 +25,7 @@ class ScreenshotsComparator {
       val oldScreenshot =
         Image.fromFile(recordedScreenshotFile)
       val newScreenshot = ScreenshotComposer.composeNewScreenshot(screenshot)
-      if (!haveSameDimensions(newScreenshot, oldScreenshot)) {
-        val originalDimension =
-          Dimension(oldScreenshot.width, oldScreenshot.height)
-        val newDimension = Dimension(newScreenshot.width, newScreenshot.height)
-        Some(
-          DifferentImageDimensions(screenshot,
-                                   originalDimension,
-                                   newDimension))
-      } else if (imagesAreDifferent(screenshot,
-                                    oldScreenshot,
-                                    newScreenshot,
-                                    tolerance)) {
+      if (imagesAreDifferent(screenshot, oldScreenshot, newScreenshot, tolerance)) {
         Some(DifferentScreenshots(screenshot))
       } else {
         None
@@ -50,6 +39,8 @@ class ScreenshotsComparator {
                                  tolerance: Double) = {
     if (oldScreenshot == newScreenshot) {
       false
+    } else if (!haveSameDimensions(newScreenshot, oldScreenshot)) {
+      true
     } else {
       val oldScreenshotPixels = oldScreenshot.pixels
       val newScreenshotPixels = newScreenshot.pixels
