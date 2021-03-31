@@ -11,6 +11,9 @@ repositories {
     maven { url 'https://maven.google.com' }
 }
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
